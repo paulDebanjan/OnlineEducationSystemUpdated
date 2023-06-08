@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container">
+    <div style="text-align: center; margin-top: 70px;"><h1>Course Buying Form</h1></div>
+    <div class="row" style="margin: 70px 0;">
+        <form id="contact-form"  method="POST" role="form"></form>
+            <div class="col-md-6" style="border: 1px solid rgb(195, 195, 195);">
+                
+                {% csrf_token %}
+                <div class="payment-div div-padding">
+                    <h5>Course Schedule</h5>
+                    <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                        <option selected>Select Your Time Schedule</option>
+                    
+                        {% for schedule in schedules %}
+                            {% if schedule.course_start_date >= dateToday %}
+                                <option value="1">({{schedule.course_start_date | date:"M j"}}<sup>th</sup>) -  ({{schedule.course_start_date | date:"l"}} To {{ schedule.course_finish_date|date:"l"}} - {{schedule.course_start_date | timesince:schedule.course_finish_date }}) - ({{schedule.course_start_time | date:"f A"}} - {{schedule.course_finish_time | date:"f A"}})</option>
+                            {% endif %}
+                        {% endfor %}
+
+                    </select>
+                </div>
+            
+            </div>
+            <div class="col-md-6 div-padding" style=" padding: 0 20px ">
+                <div class="user-info " style="border: 1px solid rgb(195, 195, 195);">
+                    <table class="table" >
+                        <thead>
+                            <tr>
+                                <th scope="col">Course Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{course.course_title}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+                
+            </div>
+            <div class="sumbit" style="text-align: center; margin: 30px 0;">
+                
+                <button type="submit" class="btn btn-warning">SUBMIT Request</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock content %}

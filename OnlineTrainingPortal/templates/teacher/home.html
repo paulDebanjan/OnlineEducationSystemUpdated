@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}Teacher Home{% endblock title %}
+{% block content %}
+<div class="container">
+    <div class="row">
+      {% include 'teacher_slid_bar.html' %}
+      <div class="col col-md-10">
+        {% for course in permission_course_list %}
+        <div class="card text-bg-info col-md-3 mx-1 my-2 d-inline-block" style="max-width: 18rem;">
+          <a href="{% url 'course:module_list' slug=course.course_id.slug %}">
+            <div>
+              <div class="card-header" style="color: blue;">{{course.course_id.title}}</div>
+              <div class="card-body">
+                <p class="" style="color: black;">Course Module: 0</p>
+              </div>
+            </div>
+          </a>
+        </div>
+        {% endfor %}
+      </div>
+        {% comment %} <div class="card text-bg col-md-3 mx-1 my-2 d-inline-block" style="max-width: 18rem;">
+            <a href="{% url 'course:adminCourseList' %}">
+              {% for course in permission_course_list %}
+                {{course.course_id.title}}
+              {% endfor %}
+            </a>
+
+        </div> {% endcomment %}
+    </div>
+</div>
+{% endblock %}

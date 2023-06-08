@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block title %}Add Cheese{% endblock %}
+{% block content %}
+<h1>Add Cheese</h1>
+<form method="post" action="#">
+{% csrf_token %}
+{{ form|crispy }}
+<button type="submit" class="btn btn-primary">Save</button>
+</form>
+
+{% endblock content %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% comment %} {% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+{{ form|crispy }} {% endcomment %}
+
+{% comment %} <div class="container">
+    <form id="contact-form"  method="POST" role="form">
+        {% csrf_token %}
+
+        <div>
+            <p class="thank"><u>{{banner}}</u></p>
+        </div>
+        <div class="messages"></div>
+    
+        <div class="controls">
+    
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="form_name">Firstname *</label>
+                        <input id="form_name" type="text" name="first_name" class="form-control" placeholder="Please enter your firstname *" required="required" data-error="Firstname is required.">
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="form_lastname">Lastname *</label>
+                        <input id="form_lastname" type="text" name="last_name" class="form-control" placeholder="Please enter your lastname *" required="required" data-error="Lastname is required.">
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="form_email">Email *</label>
+                        <input id="form_email" type="email" name="email" class="form-control" placeholder="Please enter your email *" required="required" data-error="Valid email is required.">
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="form_need">Please specify your need *</label>
+                        <select id="form_need" name="specification" class="form-control" required="required" data-error="Please specify your need.">
+                            <option value=""></option>
+                            <option value="Request quotation">Schedule Problem </option>
+                            <option value="Request order status">Course Module Problem</option>
+                            <option value="Request copy of an invoice">Advice</option>
+                            <option value="Other">Other</option>
+                        </select>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="form_message">Message *</label>
+                        <textarea id="form_message" name="message" class="form-control" placeholder="Write Your Message.. *" rows="4" required="required" data-error="Please, leave us a message."></textarea>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <input type="submit" class="btn btn-success btn-send" value="Send message">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <p class="text-muted">
+                        <strong>*</strong> These fields are required. Contact form template by
+
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+   {% endcomment %}
+{% comment %} {% endblock content %} {% endcomment %}

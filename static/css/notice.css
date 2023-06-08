@@ -1,0 +1,64 @@
+/* Notice List */
+.notic-board-header{
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    color: #ec407a;
+}
+
+
+.container .notice-list-div{
+    padding: 15px 10px;
+}
+
+.container .notice-list-div .published-date {
+    color: #607D8B;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Notice Desceription */
+#notice-container{
+    margin-top: 50px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    margin-bottom: 60px;
+}
+#notice-title{
+    font-size: 30px;
+    font-weight: bold;
+}
+#detail-description{
+    margin-top: 20px;
+    text-align: justify;
+}
+.published-date{
+    font-size: 15px;
+    color: rgb(181, 181, 181);
+}
+.discription-div{
+    width: 1000px;
+}
+#notice-file{
+    display: inline-block;
+}
+#notice-file img {
+    width: 90px;
+}

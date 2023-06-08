@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block title %}Question List{% endblock title%}
+{% block content %}
+
+<div class="container my-3">
+    <div class="row">
+      
+    {% include 'teacher_slid_bar.html' %}
+    <div class="col col-md-10">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">Question List</li>
+            </ol>
+        </nav>
+        <h2 class="mb-3">{{course_name}} Question List</h2>
+        {% comment %} <a href="" class="btn btn-primary mb-3" role="button">Add Module</a> {% endcomment %}
+        <div class="row">
+            <div class="col col-md-6">
+                {% comment %} <a href="{% url 'course:module_crate' slug=slug_text %}" class="btn btn-primary mb-3" role="button">Add Schedule</a> {% endcomment %}
+            </div>
+            <div class="col col-md-6 text-end">
+                {% comment %} <a href="{% url 'course:detailView' slug=slug_text %}" class="btn btn-info mb-3" role="button">View Course</a> {% endcomment %}
+            </div>
+
+        </div>
+        
+        <div class="card">
+            <table class="table mb-0 text-center">
+            <thead>
+                <tr>
+                <th>Module Name</th>
+                <th>Course Name</th>
+                <th>Creator</th>
+                <th>Updated</th>
+                <th class="">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for question in question_list %}
+                <tr>
+                    <td class="align-middle text-right"><a href="{% url 'course:question_update' slug=course_slug slug2=module_slug slug3=element_slug question_pk=question.id %}">{{question.text}}</td>
+                    <td class="align-middle text-right">{{question.creator }}</td>
+                    <td class="align-middle">{{module.creator}}</td>
+                    <td class="align-middle">{{module.updated}}</td>
+                    <td class="text-center">
+                    <a href="" class="btn btn-danger">Delete</a>
+                    {% comment %} <a href="{% url 'course:scheduleDelete' slug=slug_text pk=schedule.id %}" class="btn btn-danger">Delete</a> {% endcomment %}
+                    </td>
+                </tr>
+                
+                {% empty %}
+                <tr>
+                    <td class="bg-light text-center font-italic" colspan="5">You haven't created any course module yet.</td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <td class=" text-left font-italic"><a href="{% url 'course:question_add' slug=course_slug slug2=module_slug slug3=element_slug %}" class="btn btn-primary" role="button">Add Question</a><td>
+                </tr>
+            </tbody>
+            </table>
+            
+        </div>
+        {% comment %} <a href="{% url 'course:detailView' slug=slug_text %}" class="btn btn-info mb-3" role="button">View Course</a> {% endcomment %}
+        
+        <div class="mt-3">
+            <a href="{% url 'teacher:home' %}" class="btn btn-secondary mt-3" role="button">Back</a>
+        </div>
+        {% comment %} <a href="{% url 'course:module_list' slug=slug_text %}" class="btn btn-secondary mt-3" role="button">Back</a> {% endcomment %}
+    </div>
+</div>
+{% endblock content %}

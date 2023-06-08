@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}Login Form{% endblock title %}
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock stylesheet%}
+{% block content %}
+<div class="row mt-4">
+    <div class="col col-md-4" style="text-align:center;">
+        <div class="alert alert-primary" role="alert">
+            <b>Login</b>
+        </div>   
+    </div>
+</div>
+<div class="row mb-5">
+    <div class="col col-md-4">
+        <form method="post" action="">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <div class="m-2 forget-password-div">
+                <a href="{% url 'userAuthentication:password_reset' %}">Forget Password?</a>
+            </div>
+            <div class="text-center mt-2">
+                <button type="submit" class="btn btn-primary col-12">Log in</button>
+            </div>
+        </form>    
+        <div class="mt-5">
+            <p>Have not account yet? <a href="{% url 'userAuthentication:singup' %}">Create Now</a>
+        </div>
+    </div>
+    
+</div>
+{% endblock content %}

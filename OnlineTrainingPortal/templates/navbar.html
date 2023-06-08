@@ -1,0 +1,70 @@
+{% load static %}
+<div class="nav">
+    <div class="container-fluid">
+        <div class="container-fluid">
+            <nav class="navbar navbar-expand-md navbar-light">
+                <a href="{% url 'home' %}" class="navbar-brand"><img src="{% static 'images/websiteLogo.png' %}" alt="OTPLogo" class="d-inline-block align-top" width="130" height="44"></a>
+                <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#toggleMobileMenu"
+                    aria-controls="toggleMobileMenu"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"         
+                >
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+                <div class="collapse navbar-collapse" id="toggleMobileMenu">
+                    <ul class="navbar-nav ms-auto text-center">
+                        <form class="search" method="get" style="margin-right: 7px;">
+                           <div class="input-group">
+                            <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search" aria-label="Search">
+                            <div class="input-group-btn">
+                                <button class="btn btn-outline-secondary" type="submit">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                </button>
+                            </div>
+                           </div>
+                        </form>
+                        {% if not request.user.is_student %}
+                            <li><a href="{% url 'home' %}" class="nav-link nav-item">Home</a></li>
+                        {% endif %}
+                        {% if not request.user.is_authenticated%}
+                        {% comment %} <li><a href="{% url 'course:corporateTraining' %}" class="nav-link nav-item">Corporate Training</a></li> {% endcomment %}
+                        {% endif %}
+                        
+                        {% if request.user.is_student or  not request.user.is_authenticated %}
+                        <li><a href="{% url 'course:home' %}" class="nav-link nav-item">Courses</a></li>
+                        <li><a href="{% url 'notice:home' %}" class="nav-link nav-item">Notice</a></li>
+                        
+                        {% endif %}
+                        {% if request.user.is_authenticated %}
+                        <li><a href="/message/group/python-complete-course-for-python-beginners/" class="nav-link nav-item">Message</a></li>
+                        {% comment %} <div class="rounded-circle">
+                            <img src="../static/images/r.png" alt="..." class="rounded-circle" width="30" height="24"style="background:blue;">
+                        </div> {% endcomment %}
+                        {% comment %} <li><a href="{% url 'logout' %}" class="nav-link btn btn-com start-btn item-login">Logout</a></li> {% endcomment %}
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                              {{request.user.first_name}}
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+                              <li><a class="dropdown-item active" href="{% url 'userAuthentication:profile' %}">Profile</a></li>
+                              <li><a class="dropdown-item" href="{% url 'userAuthentication:settings' %}">Settings</a></li>
+                              {% comment %} <li><a class="dropdown-item" href="#">Something else here</a></li> {% endcomment %}
+                              <li><hr class="dropdown-divider"></li>
+                              <li><a class="dropdown-item" href="{% url 'userAuthentication:logout' %}">Logout</a></li>
+                            </ul>
+                          </div>
+                        {% else %}
+                        <li><a href="{% url 'userAuthentication:login' %}" class="nav-link btn btn-com start-btn item-login">Login</a></li>
+                        <li><a href="{% url 'userAuthentication:singup' %}" class="nav-link btn btn-com start-btn item-login">Registration</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+</div>

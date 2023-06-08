@@ -1,0 +1,241 @@
+{% extends 'base.html' %}
+{% block content%}
+<div class="form-body">
+    
+    <div class="container container6">
+        <div class="title">Sign Up</div>
+        <div class="content">
+          <form action="#" method="POST">
+              {% csrf_token %}
+            <div class="user-details">
+              <div class="col-md-6">
+                <div class="input-box register-style ">
+                    <span class="details">First Name</span>
+                    <!-- <input type="text" name="username" name="last_name" placeholder="Enter your username" required>
+                     -->
+    
+                     {{form.first_name}}
+                  </div>
+              </div>
+              <div class="col-md-6">
+                <div class="input-box register-style">
+                    <span class="details">Last Name</span>
+                    <!-- <input type="text" name="username" name="last_name" placeholder="Enter your username" required>
+                     -->
+    
+                     {{form.last_name}}
+                  </div>
+              </div>
+              
+              <div class="col-md-6">
+                <div class="input-box register-style">
+                        <span class="details">Username</span>
+                        <!-- <input type="text" name="username" name="last_name" placeholder="Enter your username" required>
+                         -->
+        
+                         {{form.username}}
+                      </div>
+              </div>
+              
+              <div class="col-md-6">
+                <div class="input-box register-style">
+                    <span class="details">Email</span>
+                    <!-- <input type="text" name="username" name="last_name" placeholder="Enter your username" required>
+                     -->
+    
+                     {{form.email}}
+                  </div>
+              </div>
+              
+              
+              
+              
+                
+                <div class="col-md-6">
+                    <div class="input-box register-style">
+                        <span class="details">Password</span>
+                        {{form.password1}}
+                    </div>
+                      
+                </div>
+                <div class="col-md-6">
+                    <div class="input-box register-style">
+                        <span class="details">Confirm Password</span>
+                        {{form.password2}}
+                    </div>
+                      
+                </div>
+              
+              
+            </div>
+            {% if messages %}
+            {% for message in messages %}
+                <li{% if message.tags %} class="alert alert-success"{% endif %}>{{ message }}</li>
+            {% endfor %}
+            {% endif %}
+    
+            {% if form.non_field_errors %}
+                <ol>
+                {% for error in form.non_field_errors %}
+                    <li class="alert alert-warning"><strong>{{ error|escape }}</strong></li>
+                {% endfor %}
+                </ol>
+            {% endif %}
+            <div class="button register-style">
+              <input type="submit" value="Sign Up">
+            </div>
+          </form>
+        </div>
+    </div>
+</div>
+</div>
+<!-- <div class="container" >
+    <div class="container">
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="col-md-8 col-md-offset-2">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Register</div>
+                    <div class="panel-body">
+                        {% if error_message %}
+                            <p class="bg-danger p-d ml-b">{{ error_message }}</p>
+                        {% endif %}
+                       
+                        <div class="form-group clearfix">
+                            <label for="{{ form.username.id_for_label }}" class="col-md-4 control-label text-right">Username<span class="text-red">*</span>:</label>
+                            <div class="col-md-6">
+                                {{ form.username }}
+                            </div>
+                        </div>
+                        <div class="form-group clearfix">
+                            <label for="{{ form.email.id_for_label }}" class="col-md-4 control-label text-right">Email<span class="text-red">*</span>:</label>
+                            <div class="col-md-6">
+                                {{ form.email }}
+                            </div>
+                        </div>
+                        <div class="form-group clearfix">
+                            <label for="{{ form.password.id_for_label }}" class="col-md-4 control-label text-right">Password<span class="text-red">*</span>:</label>
+                            <div class="col-md-6">
+                                {{ form.password1 }}
+                            </div>
+                        </div>
+                        <div class="form-group clearfix">
+                            <label for="{{ form.password_repeat.id_for_label }}" class="col-md-4 control-label text-right">Confirm password:</label>
+                            <div class="col-md-6">
+                                {{ form.password2 }}
+                            </div>
+                        </div>
+                        <div class="form-group clearfix">
+                            <label for="{{ form.first_name.id_for_label }}" class="col-md-4 control-label text-right">First Name:</label>
+                            <div class="col-md-6">
+                                {{ form.first_name }}
+                            </div>
+                        </div>
+                        <div class="form-group clearfix">
+                            <label for="{{ form.last_name.id_for_label }}" class="col-md-4 control-label text-right">Last Name:</label>
+                            <div class="col-md-6">
+                                {{ form.last_name }}
+                            </div>
+                        </div>
+                       
+                        <div class="col-md-6 col-md-offset-4">
+                            <input type="submit" value="Register" class="btn btn-success">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div> -->
+
+    <!-- <div class="form-body">
+    
+        <div class="container container5">
+            <div class="title">Login</div>
+            <div class="content">
+              <form action="#" method="POST">
+                  {% csrf_token %}
+                <div class="user-details">
+                  
+                  <div class="input-box ">
+                    <span class="details">Username</span>
+                    <input type="text" name="username" name="last_name" placeholder="Enter your username" required>
+                  </div>
+                  
+                  <div class="input-box">
+                    <span class="details">Password</span>
+                    <input type="password" name="password" placeholder="Enter your password" required>
+                  </div>
+                  
+                </div>
+                {% if messages %}
+                {% for message in messages %}
+                    <li{% if message.tags %} class="alert alert-success"{% endif %}>{{ message }}</li>
+                {% endfor %}
+                {% endif %}
+        
+                {% if form.non_field_errors %}
+                    <ol>
+                    {% for error in form.non_field_errors %}
+                        <li class="alert alert-warning"><strong>{{ error|escape }}</strong></li>
+                    {% endfor %}
+                    </ol>
+                {% endif %}
+                <div class="button">
+                  <input type="submit" value="Login">
+                </div>
+              </form>
+            </div>
+        </div>
+    </div> -->
+</div>
+<!-- <div class="container">
+    <form action="#" method="POST" novalidate action="signup">
+        {% csrf_token %}
+        {{form.first_name}}
+        {{form.last_name}}
+        {{form.username}}
+        {{form.password1}}
+        {{form.password2}}
+        <!-- {% for fm in form %}
+          {{fm.label_tag}} {{fm}} {{fm.errors|striptags}} <br> <br>
+        {% endfor %} -->
+        <!-- <button type="submit">Sign up</button>
+    </form> -->
+    <!-- {% comment %} Sign_Up Message {% endcomment %}
+    {% if messages %}
+        {% for message in messages %}
+            <li{% if message.tags %} class="alert alert-success"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    {% endif %} -->
+
+    <!-- {% if form.non_field_errors %}
+            <ol>
+            {% for error in form.non_field_errors %}
+                <li class="alert alert-warning"><strong>{{ error|escape }}</strong></li>
+            {% endfor %}
+            </ol>
+        {% endif %}
+</div> --> -->
+
+{% endblock content%}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

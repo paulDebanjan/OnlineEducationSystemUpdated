@@ -1,0 +1,12 @@
+<div class="col col-md-2 mb-3 py-3 border">
+  <div>
+    <h4>Options</h4>
+  </div>
+  <ul>
+      <a href="{% url 'administration:home' %}"><li>> Home<li></a>
+      <a href="{% url 'course:adminCourseList' %}"><li>> Course List<li></a>
+      <a href="{% url 'notice:adminBlog' %}"><li>> Blog List<li></a>
+      <a href="{% url 'userAuthentication:userPendingView' %}"><li>> Registration  <li></a>
+      <a href="{% url 'userAuthentication:course_request' %}"><li>> Course Enroll <li></a>
+    </ul>
+</div>

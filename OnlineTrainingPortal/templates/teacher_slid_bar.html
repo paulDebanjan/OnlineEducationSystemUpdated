@@ -1,0 +1,10 @@
+<div class="col col-md-2 mb-3 py-3 border">
+    <div>
+      <h4>Menu Options</h4>
+    </div>
+    <ul>
+        {% for course in permission_course_list %}
+        <a href="{% url 'course:module_list' slug=course.course_id.slug %}"><li>> {{course.course_id.title}} <li></a>
+        {% endfor %}
+      </ul>
+  </div>

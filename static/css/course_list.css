@@ -1,0 +1,98 @@
+.course-container{
+    margin-top: 100px;
+    
+}
+
+.row{
+    margin-top: 25px;
+}
+
+.card-divition{
+    width: 209px;
+    height: 280px;
+    display: inline-block;
+    margin: 0px 5px;
+}
+
+#card-based{
+    height: 130px;
+    text-align: right;
+    background-color: rgb(181, 232, 181);
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+    
+    
+}
+.main-card{
+    border:1px solid rgb(191, 191, 191);
+    width: 100%;
+    box-sizing: border-box;
+}
+#card-based p{
+    padding-top: 20px;
+    font-size: 30px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    line-height: 31px;
+    padding-bottom: 8px;
+    padding-right: 10px;
+}
+#card-body{
+    text-align: left;
+    padding: 10px;
+    color: rgb(35, 34, 34);
+    background-color: rgb(255, 255, 255);
+    box-sizing: border-box;
+}
+#card-body p{
+    font-size: 15px;
+    line-height: 0px;
+    padding-left: 22px;
+    padding-top: 5px;
+    margin-bottom: 6px;
+}
+#card-body #card-info{
+    margin-bottom: 10px;
+}
+#button-div{
+    width: 100%;
+    text-align: center;
+    margin-bottom: 10px;
+}
+#button-div #course-view-button{
+    padding: 8px 18px;
+    border-radius: 5px;
+    text-align: center; 
+    background-color: #fff;
+}
+#enroll-btn{
+    padding: 5px 10px;
+    background-color: rgb(253, 221, 62);
+    border: 1px solid rgb(243, 208, 36);
+    border-radius: 5px;
+}
+.row{
+    margin-top: 0px;
+}
+
+.material-iron-text div div a i{
+    color: #E91E63;
+}
+.material-iron-text div div a span{
+    color: #546E7A;
+}
+.material-iron-text div button{
+    padding: 0px;
+    text-decoration: none;
+}
+.material-iron-text div button i{
+    color: #E91E63;
+}
+
+.material-iron-text div button span{
+    padding-left: 5px ;
+    color: #546E7A;
+    text-decoration: none !important;
+}

@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %} Sign Up Form {% endblock title %}
+{% block content %}
+<div class="row mt-5 mb-5">
+    <div class="col col-md-6">
+        <h2>Sign up for a free account</h2>
+        <p>Select below the type of account you want to create</p>
+        <a href="{% url 'userAuthentication:studentSignUp' %}" class="btn btn-primary btn-lg">I'm a Student</a>
+        <a href="{% url 'userAuthentication:teacherSignUp' %}" class="btn btn-info btn-lg">I'm a Teacher</a> 
+    </div>
+{% endblock content %}

@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}{{course.title|slice:40}}{% endblock title %}
+<!-- {% block stylesheet %}<link rel="stylesheet" href="{% static 'css/course_list.css' %}">{% endblock stylesheet %} -->
+<!-- {% block scripts %}<script src="{% static 'js/quiz.js' %}" defer></script>{% endblock scripts %} -->
+{% block content %}
+    <h1>Chatting Group: {{group_name}}</h1>
+
+    <textarea name="" id="chat-area" cols="100" rows="30">
+        {% for msg in messages %}
+            {{msg.user_id.first_name}}: {{msg.message}}
+        {% endfor %}
+    </textarea> <br>          <!-- textarea box -->
+    <input type="text" id="message-writing-area" size="114" data-user_id="{{request.user.pk}}">                        <!-- input box -->
+    <input type="button" value="Send Message" id="message-send-btn">                <!-- send buttion -->
+
+    {{group_name | json_script:"group-name"}}                                       <!-- taking group value javaScript to html -->
+
+    <script>
+        const group_name = JSON.parse(document.getElementById('group-name').textContent)
+        console.log(group_name)
+        // var ws = new WebSocket('ws://127.0.0.1:8000/ws/sc/')                            // creating websocket
+        var ws = new WebSocket(
+            'ws://'
+            + window.location.host
+            + '/ws/sc/'
+            + group_name
+            + '/'
+        )
+        ws.onopen = function(event){                                                    // JavaScipt chnnels property
+            console.log('websocket opened...')
+        }
+    ws.onmessage = function(event){
+            const data = JSON.parse(event.data)
+            document.querySelector('#chat-area').value += `${data.user_id}: ${data.msg} \n`
+        }
+        ws.onerror = function(event){                                                   // JavaScipt chnnels property
+            console.log('error orrured...')
+        }
+        ws.onclose = function(event){                                                   // JavaScipt chnnels property
+            console.log('websocket closed...')
+        }
+    
+    
+        document.getElementById('message-send-btn').onclick = function(event) {         // creating event handler
+            const messageInputDom = document.getElementById('message-writing-area')     // seleting input send box
+            const message = messageInputDom.value
+            const modalBtn = document.getElementById("message-writing-area")                                      // taking message value from text input box
+            const user_id = modalBtn.getAttribute('data-user_id')
+            console.log(user_id)
+            ws.send(JSON.stringify({                                                    // converting obj to string
+                'msg' : message,                                                        // sending message
+                'user_id': user_id
+            }))
+            messageInputDom.value = ''                                                  // clearing message writing box
+    
+        }
+    
+    
+    
+    </script>
+{% endblock content %}

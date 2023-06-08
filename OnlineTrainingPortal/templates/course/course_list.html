@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% block title %}Courses{% endblock title %}
+{% load static %}
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'css/course_list.css' %}">
+{% endblock stylesheet %}
+{% block content %}
+<div class="container-fluid">
+  <div class="course-container">
+    {% for course in course_list  %}
+  
+
+    <div class="card-divition">   
+      <div class="inline-block">
+          <div class="card-main-div">
+            <a href="/course/{{course.slug}}">
+            <div class="main-card">
+              <div id="card-based">
+                <p class="card-title">{{ course.title|slice:":23" }}</p>
+              </div>
+              <div id="card-body"> 
+                <div id="card-info">
+                  <p><i class="fas fa-book-open"></i> {{course.lesson}} lessons</p>
+                  <p><i class="far fa-clock"></i> {{course.duration}} days</p>
+                </div>
+                <div id="button-div">
+                  <button id="course-view-button">View Course Details</button>
+                </div>
+                <!-- <p class="card-text">with {{course.creator.first_name}} {{course.creator.last_name}}</p> -->
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  
+  {%empty%}
+  No data found.
+  {% endfor %}
+  <div class="container_5">
+      <div class="container4">
+          <nav aria-label="...">
+            {% if last_page > 1 %}
+              <ul class="pagination">
+                
+              {% if courseDataFinal.has_previous %}
+                <li class="page-item ">
+                  <a class="page-link" href="/course/?page=1" >First</a>
+                </li>
+                <li class="page-item">
+                  <a class="page-link" href="/course/?page={{courseDataFinal.previous_page_number}}">Previous</a>
+                </li>
+                {% endif %}
+                {% for n in page_list %}
+                <li class="page-item">
+                  <a class="page-link" href="/course/?page={{n}}">{{n}}</a>
+                </li>
+                {% endfor %}
+  
+                {% if courseDataFinal.has_next%}
+                
+                <li class="page-item">
+                  <a class="page-link" href="/course/?page={{courseDataFinal.next_page_number}}">Next</a>
+                </li>
+                {% endif %}
+              </ul>
+              {% endif %}
+            </nav>
+      </div>
+  </div>
+  </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block title %}Blog List{% endblock title%}
+{% block content %}
+
+<div class="container my-3">
+    <div class="row">
+    {% include 'adminSiteBar.html' %}
+    <div class="col col-md-10">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">Permission Site</li>
+            </ol>
+        </nav>
+        <h2 class="mb-3">{{course_name}} Course Permission List</h2>
+        <a href="{% url 'course:permissionCreate' slug=slug_text %}" class="btn btn-primary mb-3" role="button">Add Permission</a>
+        <div class="card">
+            <table class="table mb-0 text-center">
+            <thead>
+                <tr>
+                <th>Course Name</th>
+                <th>Teacher Name</th>
+                <th>Last Updated</th>
+                <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for permission in coursepermissionmodel_list %}
+                <tr>
+                    <td class="align-right"><a href="{% url 'course:permissionUpdate' slug=slug_text pk=permission.id %}">{{permission.course_id.title}}</a></td>
+                    <td class="align-middle">{{ permission.teacher_id.first_name|add:" "|add:permission.teacher_id.last_name }}</td>
+                    <td class="align-middle">{{ permission.updated|date:"SHORT_DATE_FORMAT" }}</td>
+                    <td class="text-center">
+                    <a href="{% url 'course:permissionUpdate' slug=slug_text pk=permission.id %}" class="btn btn-warning">Edit</a>
+                    <a href="{% url 'course:permissionDelete' slug=slug_text pk=permission.id %}" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td class="bg-light text-center font-italic" colspan="5">You haven't created any quiz yet.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock content %}

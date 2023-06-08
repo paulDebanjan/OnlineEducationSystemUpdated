@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    
+    <p>{{banner}}</p>
+
+    <br>
+    <br>
+
+    <table class="table col-md-6">
+        <tr>
+            <th>Name</th>
+            <th>Title</th>
+        </tr>
+        {% for n in programmer_list%}
+        <tr>
+            <td> {{n.name}} </td>
+            <td> {{n.title}} </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock content %}

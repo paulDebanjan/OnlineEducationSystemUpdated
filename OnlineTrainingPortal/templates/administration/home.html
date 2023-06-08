@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block title %}Administration Page{% endblock title %}
+{% block content %}
+<div class="container">
+    <div class="row my-3">
+      {% include 'adminSiteBar.html' %}
+      <div class="col col-md-10">
+        <div class="card text-bg col-md-3 mx-1 my-2 d-inline-block" style="max-width: 18rem;">
+            <a href="{% url 'course:adminCourseList' %}">
+              <div>
+                <div class="card-header">Course Topic </div>
+                <div class="card-body">
+                  <h5 class="card-title">Report</h5>
+                  <p class="card-text">Total Course: {{ total_course }}</p>
+                </div>
+              </div>
+            </a>
+        </div>
+        
+        <div class="card text-bg-info col-md-3 mx-1 my-2 d-inline-block" style="max-width: 18rem;">
+            <a href="{% url 'notice:adminBlog' %}">
+              <div>
+                <div class="card-header">Notice Board </div>
+                <div class="card-body">
+                  <h5 class="card-title">Report</h5>
+                  <p class="card-text">Total Post: {{ total_post }}</p>
+                </div>
+              </div>
+            </a>
+        </div>
+        
+        <div class="card text-bg-warning col-md-3 mx-1 my-2 d-inline-block" style="max-width: 18rem;">
+            <a href="{% url 'userAuthentication:userPendingView'%}">
+              <div>
+                <div class="card-header">Registration Topic</div>
+                <div class="card-body">
+                  <p style="margin: 0; pedding:0;">Total User: {{ total_user }} </p>
+                  <p style="margin: 0; pedding:0;">Total Pending: {{ total_pending}} </p>
+                </div>
+              </div>
+            </a>
+        </div>
+        <div class="card text-bg-warning col-md-3 mx-1 my-2 d-inline-block" style="max-width: 18rem;">
+            <a href="{% url 'userAuthentication:course_request'%}">
+              <div>
+                <div class="card-header">Course Enrolment Topic</div>
+                <div class="card-body">
+                  <p style="margin: 0; pedding:0;">Course User: {{ course_user }} </p>
+                  <p style="margin: 0; pedding:0;">Pending Permission: {{ enroll_request }} </p>
+                </div>
+              </div>
+            </a>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+{% endblock %}

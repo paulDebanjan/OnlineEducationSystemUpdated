@@ -1,0 +1,203 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Home{% endblock title %}
+{% block content %}
+
+    <!-- Banner Part Start From Here -->
+    <div class="banner">
+      <div class="container">
+          <div class="row">
+              <div class="col-md-12">
+                  <div class="banner-left-content">
+                      <h1 class="banner-title">
+                          Online Training Prortal
+                      </h1>
+                      <p class="banner-dis">Online Training Portal is the unique Training Portal Where You can larn your topic wise course.</p>
+                      <a href="{% url 'course:home' %}"><button class="btn btn-com start-btn">Start Now </button></a>
+                  </div>
+              </div>     
+                  
+          </div>
+      </div>
+  </div>
+  <!-- Banner Part end Here -->
+      
+
+  <!-- Features Part Start From Here -->
+  <div class="promo_section">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="con-lg-7 col-md-8">
+          <div class="section_headling text-center">
+            <h2>FEATURES</h2>
+          </div>
+        </div>
+      </div>
+      <div class="row mobile_px_20">
+        <div class="col-md-6 col-lg-3">
+          <div class="single_promo_hover signle_promo_1 text-center">
+            <div class="circle-iron">
+              <span class="feature-icon">
+                <div class="featres-icon">
+                  <i class="fa-brands fa-discourse"></i>
+                </div>
+              </span>
+            </div>
+            <div class="card-content">
+              <h4>Enroll Course</h4>
+              <p>You can be enroll any course using this site any time from any where.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="single_promo_hover signle_promo_1 text-center">
+            <div class="circle-iron">
+              <span class="feature-icon">
+                <div class="featres-icon">
+                  <i class="fa-solid fa-file-arrow-down"></i>
+                </div>
+              </span>
+            </div>
+            <div class="card-content">
+              <h4>Home Work</h4>
+              <p>You can be enroll any course using this site</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="single_promo_hover signle_promo_1 text-center">
+            <div class="circle-iron">
+              <span class="feature-icon">
+                <div class="featres-icon">
+                  <i class="fa-solid fa-headset"></i>
+                </div>
+              </span>
+            </div>
+            <div class="card-content">
+              <h4>Live Steam</h4>
+              <p>You can be enroll any course using this site any time from any where.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="single_promo_hover signle_promo_1 text-center">
+            <div class="circle-iron">
+              <span class="feature-icon">
+                <div class="featres-icon">
+                  <i class="fa-solid fa-stamp"></i></i>
+                </div>
+              </span>
+            </div>
+            <div class="card-content">
+              <h4>Certificate</h4>
+              <p>After Finishing The Course this site will be provide a Course Certificate.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Features Part End Here -->
+  <!-- User Part Start From Here -->
+  <div class="promo_section">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="con-lg-7 col-md-8">
+          <div class="section_headling text-center">
+            <h2>Our Students Comment</h2>
+          </div>
+        </div>
+      </div>
+      <div class=" row  row-1 ">
+        <div class="col-md-4 user-card">
+          <div class="card-img">
+            <div class="card-background"></div>
+          </div>
+          <div class="profile-img">
+            <img src="{% static 'images/user1.webp'%}" alt="">
+          </div>
+          <div class="card-content" >
+            <h3>Debanjan Paul</h3>
+            <p>I Love This Site So Much. I want to regularly use this site.Thank You so much.</p>
+          </div>
+          <div class="card-icon" >
+            <div class="inside-card-icon">
+              <i class="fa-solid fa-star-half-stroke c-icon"></i>
+            </div>
+            <div class="inside-card-icon">
+              <i class="fa-solid fa-star-half-stroke c-icon"></i>
+            </div>
+            <div class="inside-card-icon">
+              <i class="fa-solid fa-star-half-stroke c-icon"></i>
+            </div>
+            <div class="inside-card-icon">
+              <i class="fa-solid fa-star-half-stroke c-icon"></i>
+            </div>
+            <div class="inside-card-icon">
+              <i class="fa-solid fa-star-half-stroke c-icon"></i>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 user-card">
+          <div class="card-img">
+            <div class="card-background"></div>
+          </div>
+          <div class="profile-img">
+            <img src="{% static 'images/user2.webp'%}" alt="">
+          </div>
+          <div class="card-content" >
+            <h3>Anjan Paul</h3>
+            <p>I Love This Site So Much. I want to regularly use this site.Thank You so much.</p>
+          </div>
+          <div class="card-icon" >
+            <div class="inside-card-icon">
+              <i class="fa-solid fa-star-half-stroke c-icon"></i>
+            </div>
+            <div class="inside-card-icon">
+              <i class="fa-solid fa-star-half-stroke c-icon"></i>
+            </div>
+            <div class="inside-card-icon">
+              <i class="fa-solid fa-star-half-stroke c-icon"></i>
+            </div>
+            <div class="inside-card-icon">
+              <i class="fa-solid fa-star-half-stroke c-icon"></i>
+            </div>
+            <div class="inside-card-icon">
+              <i class="fa-solid fa-star-half-stroke c-icon"></i>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 user-card">
+          <div class="card-img">
+            <div class="card-background"></div>
+          </div>
+          <div class="profile-img">
+            <img src="{% static 'images/user3.png'%}" alt="">
+          </div>
+          <div class="card-content" >
+            <h3>Pankag Kanti Paul</h3>
+            <p>I Love This Site So Much. I want to regularly use this site.Thank You so much.</p>
+          </div>
+          <div class="card-icon" >
+            <div class="inside-card-icon">
+              <i class="fa-solid fa-star-half-stroke c-icon"></i>
+            </div>
+            <div class="inside-card-icon">
+              <i class="fa-solid fa-star-half-stroke c-icon"></i>
+            </div>
+            <div class="inside-card-icon">
+              <i class="fa-solid fa-star-half-stroke c-icon"></i>
+            </div>
+            <div class="inside-card-icon">
+              <i class="fa-solid fa-star-half-stroke c-icon"></i>
+            </div>
+            <div class="inside-card-icon">
+              <i class="fa-solid fa-star-half-stroke c-icon"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content%}

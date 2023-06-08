@@ -1,0 +1,148 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}{{course.title|slice:40}}{% endblock title %}
+{% block stylesheet %}<link rel="stylesheet" href="{% static 'css/course_list.css' %}">{% endblock stylesheet %}
+{% block scripts %}<script src="{% static 'js/quiz.js' %}" defer></script>{% endblock scripts %}
+{% block content %}
+<!-- Modal -->
+<div class="modal fade" id="quizStartModel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Do You Want to Start?</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="model-body-confirm">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+        <button type="button" id="modalBtn" class="btn btn-primary">Yes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container-fluid" style="margin-top: 18px">
+<div class="row">
+    <div class="col-md-9 course_title"><h2>{{course.title|slice:50}}</h2></h1></div>
+    <div class="col-md-3">
+      {% if enoll_form_active == True %}
+      <button class="btn btn-com msg-btn disabled">Message</button>
+      <!-- <a href="{% url 'videoCall' %}"><button class="btn start-btn live-btn">Live Class</button></a></div> -->
+      <button class="btn start-btn live-btn disabled">Live Class</button>
+      {% endif %}
+      {% if enoll_form_active == False %}
+      <a href="http://127.0.0.1:8000/message/group/{{course.slug}}"><button class="btn btn-com msg-btn">Message</button></a>
+      <!-- <a href="{% url 'videoCall' %}"><button class="btn start-btn live-btn">Live Class</button></a></div> -->
+      <a href="http://127.0.0.1:4000/"><button class="btn start-btn live-btn">Live Class</button></a>
+      {% endif %}
+  </div>
+  <div class="course_title">
+    
+  </div>
+  <div class="row" style="margin-top: 10px;">
+    <div class="col-md-4">
+      <iframe width="380" height="209.5" src="https://www.youtube.com/embed/{{course.video}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <div class="course_discription col-md-7" style="margin-left: 10px;">
+      <div class="card-content">
+        <h3 style="text-align: left; padding-left: 20px;">Description</h3>
+      </div>
+      <div class="card-content">
+        <p>{{course.description}}</p>
+      </div>
+    </div>
+    </div>
+  </div>
+  {% if enoll_form_active == True %}
+    <div class="row justify-content-md-center py-4 schedule-style schedule-style-main">
+      <div class="col-md-8" style="border: 1px solid #EEE;">
+        <table class="table schedule-style text-center">
+          <thead>
+            <tr>
+            <th>Batch Name</th>
+            <th>Start Date</th>
+            <th>Total Day</th>
+            <th>Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for schedule in schedules %}
+              {% if schedule.start_date > dateToday %}
+              <tr>
+                <td>{{schedule.batch_name}}</td>
+                <td>{{schedule.start_date | date:"M j"}}<sup>th</sup></td>
+                <td>{{schedule.start_date | date:"l"}} - {{ schedule.finish_date|date:"l"}} ({{schedule.start_date | timesince:schedule.finish_date }})</td>
+                <td>{{schedule.start_time | date:"f A"}} - {{schedule.finish_time | date:"f A"}}</td>
+              </tr>
+              {% endif %}
+            {% endfor %}
+            
+          </tbody>
+          {% if total_schedule == 1 %}
+            <table>
+              <a href="{% url 'course:enrol_form' slug=course_slug %}" id="enroll-btn" class="btn">Enroll Now</a>
+            </table>
+          {% endif%}
+        </table>
+      </div>
+    </div>
+  {% endif %}
+  <div class="row">
+    <div class="col col-md-1">
+    </div>
+    <div class="col col-md-8">
+      <div class="course_content">
+        {% if module.count > 0 %}
+        <h3>Course Content</h3>
+        {% endif %}
+        <div class="topic">
+          <div class="accordion accordion-flush" id="accordionFlushExample">
+            {% for module in module_list %}
+            <div class="accordion-{{module.id}} border">
+              <h2 class="accordion-header" id="flush-heading{{module.id}}">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{module.id}}" aria-expanded="false" aria-controls="flush-collapse{{module.id}}">
+                  {{module.name}}
+                </button>
+              </h2>
+              <div id="flush-collapse{{module.id}}" class="accordion-collapse collapse" aria-labelledby="flush-heading{{module.id}}" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">
+                  <div class="row">
+                    <div class="col-md-12 material-iron-text">
+                      {% for material in module_material %}
+                        <div>
+                          {% if material.module_id.id == module.id %}
+                            {% if material.topic == "video" %}
+                            <div><a href="/media/{{material.data}}"><i class="far fa-play-circle"></i></i> <span>{{material.name}}</span></a></div>
+                            {% endif %}
+                            {% if material.topic == "slide" %}
+                            <div><a href="/media/{{material.data}}"><i class="far fa-file-powerpoint"></i> <span>{{material.name}}</span></a></div>
+                            {% endif %}
+                            {% if material.topic == "quiz" %}
+                              <button
+                                  class="btn btn-link modal-button"
+                                  data-pk="{{material.pk}}"
+                                  data-quiz="{{material.name}}"
+                                  data-questions="{{material.number_of_questions}}"
+                                  data-time="{{material.time}}"
+                                  data-bs-toggle="modal" 
+                                  data-bs-target="#quizStartModel"><i class="far fa-lightbulb"></i><span>{{material.name}}</span>
+                              </button>
+                            {% endif %}
+                          {% endif %}
+                        </div>
+                      {% endfor %}
+                    </div>
+                  </div>
+                </div>
+              </div>   
+            </div>
+            {% endfor%}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col col-md-3">
+    </div>
+  </div>
+</div>
+{% endblock content %}

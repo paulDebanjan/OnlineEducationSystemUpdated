@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block title %}Blog List{% endblock title%}
+{% block content %}
+
+<div class="container my-3">
+    <div class="row">
+    {% include 'adminSiteBar.html' %}
+    <div class="col col-md-10">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">Blog Site</li>
+            </ol>
+        </nav>
+        <h2 class="mb-3">Blog Post List</h2>
+        <a href="{% url 'notice:createPost' %}" class="btn btn-primary mb-3" role="button">Add Post</a>
+        <div class="card">
+            <table class="table mb-0 text-center">
+            <thead>
+                <tr>
+                <th>Title</th>
+                <th>Last Updated</th>
+                <th>Total Comment</th>
+                <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for post in blogpostmodel_list %}
+                <tr>
+                    <td class="align-right"><a href="{% url 'notice:blogUpdate'  slug=post.slug %}">{{post.title}}</a></td>
+                    <td class="align-middle">{{ post.updated|date:"SHORT_DATE_FORMAT" }}</td>
+                    <td class="align-middle"> 1</td>
+                    <td class="text-center">
+                    <a href="{% url 'notice:blogDetail'  slug=post.slug %}" class="btn btn-primary">View</a>
+                    <a href="{% url 'notice:blogdelete'  slug=post.slug %}" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td class="bg-light text-center font-italic" colspan="5">You haven't created any post yet.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock content %}

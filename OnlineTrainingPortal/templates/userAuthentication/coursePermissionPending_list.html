@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block title %}Registration Permission Page{% endblock title%}
+{% block content %}
+
+<div class="container my-3">
+    <div class="row">
+    {% include 'adminSiteBar.html' %}
+    <div class="col col-md-10">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">Course Permission</li>
+            </ol>
+        </nav>
+        <h2 class="mb-3">Course Pending List</h2>
+        <a href="{% url 'userAuthentication:createUser' %}" class="btn btn-primary mb-3" role="button">Add Permission</a>
+        <div class="card">
+            <table class="table mb-0 text-center">
+            <thead>
+                <tr>
+                <th>Course Mame</th>
+                <th>Batch Name</th>
+                <th>Username</th>
+                <th>Phone Number</th>
+                <!-- <th>Method</th> -->
+                <!-- <th>Transaction ID</th> -->
+                <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for request in enrollform_list %}
+                <tr>
+                    <td class="align-middle"><a href="#">{{ request.course_id|slice:":2" }}</a></td>
+                    <td class="align-middle">{{request.schedule}}</td>
+                    <td class="align-middle">{{request.user_id}}</td>
+                    <td class="align-middle">{{ request.phone_number }}</td>
+                    <!-- <td class="align-middle">{{ request.transaction_method }}</td> -->
+                    <!-- <td class="align-middle">{{ request.transaction_id }}</td> -->
+                    {% comment %} <td class="align-middle">{{ request.user}}</td> {% endcomment %}
+                    <td class="text-right">
+                    <a href="{% url 'userAuthentication:course_approved' pk=request.id %}" class="btn btn-primary">Accept</a>
+                    <a href="{% url 'userAuthentication:course_permission_delete' pk=request.id %}" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td class="bg-light text-center font-italic" colspan="7">Any user course request is not pending yet.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock content %}

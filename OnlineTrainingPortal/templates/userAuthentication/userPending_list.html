@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block title %}Registration Permission Page{% endblock title%}
+{% block content %}
+
+<div class="container my-3">
+    <div class="row">
+    {% include 'adminSiteBar.html' %}
+    <div class="col col-md-10">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">Registration Site</li>
+            </ol>
+        </nav>
+        <h2 class="mb-3">Pending List</h2>
+        <a href="{% url 'userAuthentication:createUser' %}" class="btn btn-primary mb-3" role="button">Add User</a>
+        <div class="card">
+            <table class="table mb-0 text-center">
+            <thead>
+                <tr>
+                <th>username</th>
+                <th>Name</th>
+                <th>Join Date</th>
+                <th>Email</th>
+                <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in user_list %}
+                <tr>
+                    <td class="align-middle"><a href="#">{{user.username}}</a></td>
+                    <td class="align-middle">{{ user.first_name|add:" "|add:user.last_name }}</td>
+                    <td class="align-middle">{{ user.date_joined|date:"SHORT_DATE_FORMAT" }}</td>
+                    <td class="align-middle">{{ user.email }}</td>
+                    <td class="text-right">
+                    <a href="{% url 'userAuthentication:approved' pk=user.id %}" class="btn btn-primary">Accept</a>
+                    <a href="{% url 'userAuthentication:delete_user' pk=user.id %}" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td class="bg-light text-center font-italic" colspan="5">Any user request is not pending yet.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock content %}

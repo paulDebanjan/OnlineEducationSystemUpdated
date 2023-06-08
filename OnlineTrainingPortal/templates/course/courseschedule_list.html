@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block title %}Course List{% endblock title%}
+{% block content %}
+
+<div class="container my-3">
+    <div class="row">
+      
+    {% include 'adminSiteBar.html' %}
+    <div class="col col-md-10">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">Schedule List</li>
+            </ol>
+        </nav>
+        <h2 class="mb-3">{{course_name}} Course Schedule</h2>
+        {% comment %} <a href="/course/schedule/create/{{slug_text}}" class="btn btn-primary mb-3" role="button">Add Schedule</a> {% endcomment %}
+        <a href="{% url 'course:scheduleCreate' slug=slug_text %}" class="btn btn-primary mb-3" role="button">Add Schedule</a>
+        <div class="card">
+            <table class="table mb-0 text-center">
+            <thead>
+                <tr>
+                <th>Batch Name</th>
+                <th>Start Date</th>
+                <th>Total Day</th>
+                <th>Time</th>
+                <th class="">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for schedule in courseschedule_list %}
+                <tr>
+                    <td class="align-middle text-right">{{schedule.batch_name}}</td>
+                    <td class="align-middle text-right">{{schedule.start_date | date:"M j"}}<sup>th</sup></td>
+                    <td class="align-middle">{{schedule.start_date | date:"l"}} - {{ schedule.finish_date|date:"l"}} ({{schedule.start_date | timesince:schedule.finish_date }})</td>
+                    <td class="align-middle">{{schedule.start_time | date:"f A"}} - {{schedule.finish_time | date:"f A"}}</td>
+                    <td class="text-center">
+                    <a href="{% url 'course:scheduleUpdate' slug=slug_text pk=schedule.id %}" class="btn btn-warning">Edit</a>
+                    <a href="{% url 'course:scheduleDelete' slug=slug_text pk=schedule.id %}" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td class="bg-light text-center font-italic" colspan="5">You haven't created any course schedule yet.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock content %}

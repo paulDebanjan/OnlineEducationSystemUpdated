@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block title %}Course List{% endblock title%}
+{% block content %}
+
+<div class="container my-3">
+    <div class="row">
+      
+    {% include 'adminSiteBar.html' %}
+    <div class="col col-md-10">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">All Courses</li>
+            </ol>
+        </nav>
+        <h2 class="mb-3">Course List</h2>
+        <a href="{% url 'course:courseCreate' %}" class="btn btn-primary mb-3" role="button">Add Course</a>
+        <div class="card">
+            <table class="table mb-0 text-center">
+            <thead>
+                <tr>
+                <th>Title</th>
+                <th>Last Updated</th>
+                <th>Modules</th>
+                <th class="">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for course in course_list %}
+                <tr>
+                    <td class="align-middle text-right"><a href="{% url 'course:courseUpdate' slug=course.slug %}">{{course.title|slice:":23"}}</a></td>
+                    <!-- <td class="align-middle">{{ course.updated|date:"SHORT_DATE_FORMAT" }}</td> -->
+                    <td class="align-middle">{{ course.updated|timesince}} ago</td>
+                    <td class="align-middle">{{ course.total_article }}</td>
+                    <td class="text-center">
+                    <a href="{% url 'course:detailView' slug=course.slug %}" class="btn btn-primary">View</a>
+                    <a href="{% url 'course:scheduleList' slug=course.slug %}" class="btn btn-secondary">Schedule</a>
+                    <a href="{% url 'course:permissionList' slug=course.slug %}" class="btn btn-warning">Permission</a>
+                    <a href="{% url 'course:courseDelete' slug=course.slug %}" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td class="bg-light text-center font-italic" colspan="5">You haven't created any course yet.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock content %}

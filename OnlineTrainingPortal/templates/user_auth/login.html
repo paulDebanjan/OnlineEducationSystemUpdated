@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block content%}
+<div class="container" >
+
+    <div class="form-body">
+    
+        <div class="container container5">
+            <div class="title">Login</div>
+            <div class="content">
+              <form action="#" method="POST">
+                  {% csrf_token %}
+                <div class="user-details">
+                  
+                  <div class="input-box ">
+                    <span class="details">Username</span>
+                    <input type="text" name="username" name="last_name" placeholder="Enter your username" required>
+                  </div>
+                  
+                  <div class="input-box">
+                    <span class="details">Password</span>
+                    <input type="password" name="password" placeholder="Enter your password" required>
+                  </div>
+                  
+                </div>
+                {% if messages %}
+                {% for message in messages %}
+                    <li{% if message.tags %} class="alert alert-success"{% endif %}>{{ message }}</li>
+                {% endfor %}
+                {% endif %}
+        
+                {% if form.non_field_errors %}
+                    <ol>
+                    {% for error in form.non_field_errors %}
+                        <li class="alert alert-warning"><strong>{{ error|escape }}</strong></li>
+                    {% endfor %}
+                    </ol>
+                {% endif %}
+                <div class="button">
+                  <input type="submit" value="Login">
+                </div>
+              </form>
+            </div>
+        </div>
+        </div>
+
+    <!-- <form action="#" method="POST" novalidate action="login">
+        {% csrf_token %}
+        
+        {% for fm in form %}
+          {{fm.label_tag}} {{fm}} {{fm.errors|striptags}} <br> <br>
+        {% endfor %}
+        <button type="submit">Login</button>
+    </form>
+    {% if form.non_field_errors %}
+            <ol>
+            {% for error in form.non_field_errors %}
+                <li class="alert alert-warning"><strong>{{ error|escape }}</strong></li>
+            {% endfor %}
+            </ol>
+        {% endif %}
+</div> -->
+{% endblock content%}

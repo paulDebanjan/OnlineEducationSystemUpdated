@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}{{blogpostmodel.title}}{% endblock title %}
+{% block stylesheet %}<link rel="stylesheet"  href="{% static 'css/notice.css' %}">{% endblock stylesheet %}
+{% block content %}
+  <div class="container-fluid">
+    <div id="notice-container">
+      <div>     
+        <h3 id="notice-title">{{blogpostmodel.title}}</h3>
+        {% if blogpostmodel.created == blogpostmodel.updated %}
+          <p class="published-date">Published Date: {{blogpostmodel.created|date:"M d, Y"}}</p>
+        {% else %}
+          <p class="published-date">Published: {{blogpostmodel.created|date:"M d, Y"}} &nbsp;&nbsp;&nbsp; Updated: {{blogpostmodel.updated|date:"M d, Y"}}</p>
+        {% endif %}
+        <div class="discription-div">
+          <p id="detail-description">{{blogpostmodel.description | safe}} </p>
+        </div>
+        
+          <hr>
+          <div id="notice-file">
+            <a href="/media/{{blogpostmodel.notice_file}}">
+              <img src="{% static 'images/file_icon.png' %}" alt="file_icon">
+              <br>  
+              <p>download_doc</p>
+            </a>
+          </div>
+          
+        
+      </div>
+  </div>
+  </div>
+{% endblock content %}

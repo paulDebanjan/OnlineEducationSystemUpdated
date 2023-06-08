@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% block title %}Module And Quiz List Page{% endblock title%}
+{% block content %}
+
+<div class="container my-3">
+    <div class="row">
+      
+        {% include 'teacher_slid_bar.html' %}
+        <div class="col col-md-10">
+            <div class="row">
+                <div class="col col-md-7">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                        <li class="breadcrumb-item active" aria-current="page">Module Element or Quiz create</li>
+                        </ol>
+                    </nav>
+                    <h2 class="mb-4">"{{module_name}}" Material List</h2>
+                </div>
+                <div class="col col-md-5">
+                    <p class="pt-2" style="margin-bottom:0;"><b>Course Name: </b>{{course_name}}</p>
+                    <p style="padding:0;"><b>Module Name: </b>{{module_name}}</p>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col col-md-6">
+                    <a href="{% url 'course:detailView' slug=course_slug %}" class="btn btn-info mb-3" role="button">View Course</a>
+                </div>
+                <div class="col col-md-6 text-end">
+                </div>
+
+            </div>
+            
+            <div class="card">
+                <table class="table mb-0 text-center">
+                <thead>
+                    <tr>
+                    <th>Material/Quiz Name</th>
+                    <th>Topic</th>
+                    <th>Updated</th>
+                    <th class="">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for material in coursematerial_list %}
+                    <tr>
+                        <td class="align-middle text-right">{{material.name|title}}</td>
+                        {% if material.topic == "quiz" %}
+                            <td class="align-middle text-right"><p style="background:#3d5afe; diplay:inline-block; margin:0; padding:0;">{{material.topic|title}}</p></td>
+                        {% else %}
+                        <td class="align-middle text-right" ><p style="background:#9c27b0; diplay:inline-block; margin:0; padding:0;">{{material.topic|title}}</p></td>
+                        {% endif %}
+                        <td class="align-middle">{{ material.updated|date:"SHORT_DATE_FORMAT" }}</td>
+                        <td class="text-center">
+
+                        {% if material.topic == 'quiz' %}
+                            <a href="{% url 'course:question_list' slug=course_slug slug2=module_slug slug3=material.slug %}" class="btn btn-info">View Question</a>
+                        {% else %}
+                            <a href="/media/{{material.data}}" class="btn btn-secondary">View Material</a>
+                        {% endif %}
+
+                        <a href="{% url 'course:element_update' slug=course_slug slug2=module_slug pk=material.id %}" class="btn btn-warning">Edit</a>
+                        {% comment %} <a href="{% url 'course:element_update' slug=course_slug slug2=module_slug slug3=material.slug %}" class="btn btn-warning">Edit</a> {% endcomment %}
+                        <a href="{% url 'course:element_delete' slug=course_slug slug2=module_slug pk=material.id %}" class="btn btn-danger">Delete</a>
+                        {% comment %} <a href="{% url 'course:element_update' slug=slug_text pk=module.id %}" class="btn btn-warning">Edit</a> {% endcomment %}
+                        {% comment %} <a href="{% url 'course:module_delete' slug=slug_text pk=module.id %}" class="btn btn-danger">Delete</a> {% endcomment %}
+                        {% comment %} <a href="{% url 'course:scheduleDelete' slug=slug_text pk=schedule.id %}" class="btn btn-danger">Delete</a> {% endcomment %}
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td class="bg-light text-center font-italic" colspan="5">You haven't created any module element or quiz yet.</td>
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <td class="text-left"><a href="{% url 'course:element_create' slug=course_slug slug2=module_slug %}" class="btn btn-primary" role="button">Add Material/Quiz</a><td>
+                    </tr>
+                </tbody>
+                </table>
+                
+            </div>
+            <a href="{% url 'course:module_list' slug=course_slug %}" class="btn btn-secondary mt-3" role="button">Back</a>
+        </div>
+    </div>
+</div>
+{% endblock content %}
