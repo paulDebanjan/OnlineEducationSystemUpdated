@@ -26,7 +26,7 @@ APP_DIR = BASE_DIR / "OnlineTrainingPortal"
 SECRET_KEY = 'django-insecure-yb9p)3!-76g)0wdb*+dx9t)@w1d!79mke^+_ntr##y8b^tk4=d'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -56,16 +56,18 @@ LOCAL_APPS = [
     'OnlineTrainingPortal.teacher.apps.TeacherConfig',
     'OnlineTrainingPortal.quizes.apps.QuizesConfig',
 ]
-CRISPY_TEMPLATE_PACK = 'bootstrap3'
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 THIRD_PARTY_APPS = [
     'tinymce',
     'channels',
     'crispy_forms',
+    'crispy_bootstrap4',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS + THIRD_PARTY_APPS    
 
 MIDDLEWARE = [
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
