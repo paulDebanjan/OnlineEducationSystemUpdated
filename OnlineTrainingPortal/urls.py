@@ -73,5 +73,5 @@ handler500 = error500.as_view()
 handler400 = error400.as_view()
 # For Media
 if settings.DEBUG:
-        urlpatterns+=static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
-        urlpatterns+=static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)
+        urlpatterns+=static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+        urlpatterns+=static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
